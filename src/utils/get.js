@@ -1,4 +1,5 @@
 import downloadGit from 'download-git-repo';
+import 'babel-polyfill';
 
 export const downloadLocal = async (projectName) => {
   let api = `hql7/wl-template-vue`;

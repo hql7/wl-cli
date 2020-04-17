@@ -1,7 +1,7 @@
 {
   "name": "wl-cli",
-  "version": "1.0.1",
-  "description": "vue wlui 最佳工程结构脚手架",
+  "version": "1.1.0",
+  "description": "vue wlui wl-cli vue项目最佳工程目录结构脚手架",
   "main": "index.js",
   "bin": {
     "wl": "./bin/wl-cli.js"
@@ -18,10 +18,13 @@
   "keywords": [
     "vue",
     "cli",
+    "vue-cli",
+    "wl-cli",
     "wlui",
     "脚手架",
-    "wlcli",
-    "wl-cli"
+    "vue脚手架",
+    "最佳工程目录结构",
+    "wlcli"
   ],
   "author": "weilan <17796646068@163.com>",
   "license": "MIT",
@@ -32,6 +35,8 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-env": "^2.4.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "chalk": "^4.0.0",
     "commander": "^5.0.0",
     "download-git-repo": "^3.0.2",

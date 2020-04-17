@@ -5,6 +5,8 @@ import fs from 'fs';
 import chalk from 'chalk';
 import symbol from 'log-symbols';
 import { promisify } from "util";
+import 'babel-polyfill';
+
 const exist = promisify(fs.stat);
 
 let init = async (projectName) => {
@@ -32,7 +34,7 @@ let init = async (projectName) => {
     ]).then(async (answer) => {
       //下载模板 选择模板
       //通过配置文件，获取模板信息
-      let loading = ora('downloading template ... 模板下载中...');
+      let loading = ora('The project is in the process of initialization, please take a moment to wait for a long time ... 项目正在初始化中，耗时较久请稍事等待...');
       loading.start();
       loading.color = "yellow";
       downloadLocal(projectName).then(() => {

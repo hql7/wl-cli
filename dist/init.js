@@ -81,7 +81,7 @@ var init = function () {
                       case 0:
                         //下载模板 选择模板
                         //通过配置文件，获取模板信息
-                        loading = (0, _ora2.default)('downloading template ... 模板下载中...');
+                        loading = (0, _ora2.default)('The project is in the process of initialization, please take a moment to wait for a long time ... 项目正在初始化中，耗时较久请稍事等待...');
 
                         loading.start();
                         loading.color = "yellow";
@@ -96,7 +96,10 @@ var init = function () {
                             json.description = answer.description;
                             //修改项目文件夹中 package.json 文件
                             _fs2.default.writeFileSync(fileName, JSON.stringify(json, null, '\t'), 'utf-8');
-                            console.log(_logSymbols2.default.success, _chalk2.default.green('Project initialization finished! 项目初始化完成！'));
+                            console.log(_logSymbols2.default.success, _chalk2.default.green('Project initialization finished! 项目初始化完成！依次运行以下命令：'));
+                            console.log(_logSymbols2.default.success, _chalk2.default.green('cd ' + projectName));
+                            console.log(_logSymbols2.default.success, _chalk2.default.green('npm install'));
+                            console.log(_logSymbols2.default.success, _chalk2.default.green('npm run serve'));
                           }
                         }, function () {
                           loading.fail();

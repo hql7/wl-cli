@@ -48,7 +48,10 @@ let init = async (projectName) => {
           json.description = answer.description;
           //修改项目文件夹中 package.json 文件
           fs.writeFileSync(fileName, JSON.stringify(json, null, '\t'), 'utf-8');
-          console.log(symbol.success, chalk.green('Project initialization finished! 项目初始化完成！'));
+          console.log(symbol.success, chalk.green('Project initialization finished! 项目初始化完成！依次运行以下命令：'));
+          console.log(symbol.success, chalk.green('cd ' + projectName));
+          console.log(symbol.success, chalk.green('npm install'));
+          console.log(symbol.success, chalk.green('npm run serve'));
         }
       }, () => {
         loading.fail();

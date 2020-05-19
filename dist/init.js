@@ -32,6 +32,35 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var exist = (0, _util.promisify)(_fs2.default.stat);
 
+// 命令行交互配置项
+var question = [{
+  type: 'input',
+  name: 'author',
+  message: 'Please enter the author name: '
+}, {
+  type: 'input',
+  name: 'description',
+  message: 'Please enter the project description: '
+}, {
+  type: 'list',
+  name: 'type',
+  message: 'Please enter the project type：',
+  choices: ["web", "mfe-subapp", "mfe-master"]
+}, {
+  type: 'input',
+  name: 'port',
+  message: 'Please enter the project port: ',
+  default: 8080,
+  validate: function validate(val) {
+    if (val.match(/\d{2,6}/g)) {
+      // 校验位数
+      return true;
+    }
+    return "请输入2-6位数字";
+  }
+}];
+
+// 创建命令
 var init = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(projectName) {
     var projectExist;
@@ -66,15 +95,9 @@ var init = function () {
             _context2.t0 = _context2['catch'](3);
 
             //命令行交互
-            _inquirer2.default.prompt([{
-              name: 'description',
-              message: 'Please enter the project description: '
-            }, {
-              name: 'author',
-              message: 'Please enter the author name: '
-            }]).then(function () {
+            _inquirer2.default.prompt(question).then(function () {
               var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(answer) {
-                var loading;
+                var loading, projectType;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
@@ -85,17 +108,21 @@ var init = function () {
 
                         loading.start();
                         loading.color = "yellow";
-                        (0, _get.downloadLocal)(projectName).then(function () {
+                        projectType = answer.type;
+
+                        (0, _get.downloadLocal)(projectName, projectType).then(function () {
                           loading.succeed();
-                          var fileName = projectName + '/package.json';
-                          if (_fs2.default.existsSync(fileName)) {
-                            var data = _fs2.default.readFileSync(fileName).toString();
+                          // 写入package.json
+                          var packageJson = projectName + '/package.json';
+                          if (_fs2.default.existsSync(packageJson)) {
+                            var data = _fs2.default.readFileSync(packageJson).toString();
                             var json = JSON.parse(data);
-                            json.name = projectName;
-                            json.author = answer.author;
-                            json.description = answer.description;
+                            json.name = projectName; // 项目名
+                            json.author = answer.author; // 作者
+                            json.description = answer.description; // 描述信息
+                            json.port = answer.port; // 端口号 默认8080
                             //修改项目文件夹中 package.json 文件
-                            _fs2.default.writeFileSync(fileName, JSON.stringify(json, null, '\t'), 'utf-8');
+                            _fs2.default.writeFileSync(packageJson, JSON.stringify(json, null, '\t'), 'utf-8');
                             console.log(_logSymbols2.default.success, _chalk2.default.green('Project initialization finished! 项目初始化完成！依次运行以下命令：'));
                             console.log(_logSymbols2.default.success, _chalk2.default.green('cd ' + projectName));
                             console.log(_logSymbols2.default.success, _chalk2.default.green('npm install'));
@@ -105,7 +132,7 @@ var init = function () {
                           loading.fail();
                         });
 
-                      case 4:
+                      case 5:
                       case 'end':
                         return _context.stop();
                     }

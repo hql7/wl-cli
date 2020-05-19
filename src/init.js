@@ -5,7 +5,6 @@ import fs from 'fs';
 import chalk from 'chalk';
 import symbol from 'log-symbols';
 import { promisify } from "util";
-import 'babel-polyfill';
 
 const exist = promisify(fs.stat);
 

@@ -1,5 +1,4 @@
 import downloadGit from 'download-git-repo';
-import 'babel-polyfill';
 
 export const downloadLocal = async (projectName, projectType) => {
   let templatePath = '';

@@ -14,7 +14,8 @@ let actionMap = {
     description: 'generate a new project from a template. 从模板生成新项目。',
     usages: [
       'wl init templateName projectName'
-    ]
+    ],
+    alias: 'i'
   }
 }
 

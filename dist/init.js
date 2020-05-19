@@ -113,7 +113,8 @@ var init = function () {
                         (0, _get.downloadLocal)(projectName, projectType).then(function () {
                           loading.succeed();
                           // 写入package.json
-                          var packageJson = projectName + '/package.json';
+                          var isNotMfeMaster = projectType !== 'mfe-master';
+                          var packageJson = isNotMfeMaster ? projectName + '/package.json' : projectName + '/master/package.json';
                           if (_fs2.default.existsSync(packageJson)) {
                             var data = _fs2.default.readFileSync(packageJson).toString();
                             var json = JSON.parse(data);
@@ -125,7 +126,7 @@ var init = function () {
                             _fs2.default.writeFileSync(packageJson, JSON.stringify(json, null, '\t'), 'utf-8');
                             console.log(_logSymbols2.default.success, _chalk2.default.green('Project initialization finished! 项目初始化完成！依次运行以下命令：'));
                             console.log(_logSymbols2.default.success, _chalk2.default.green('cd ' + projectName));
-                            console.log(_logSymbols2.default.success, _chalk2.default.green('npm install'));
+                            console.log(_logSymbols2.default.success, _chalk2.default.green(isNotMfeMaster ? 'npm install' : 'npm run cinit'));
                             console.log(_logSymbols2.default.success, _chalk2.default.green('npm run serve'));
                           }
                         }, function () {

@@ -69,7 +69,8 @@ let init = async (projectName) => {
       downloadLocal(projectName, projectType).then(() => {
         loading.succeed();
         // 写入package.json
-        const packageJson = `${projectName}/package.json`;
+        const isNotMfeMaster = projectType !== 'mfe-master';
+        const packageJson = isNotMfeMaster ? `${projectName}/package.json` : `${projectName}/master/package.json`;
         if (fs.existsSync(packageJson)) {
           const data = fs.readFileSync(packageJson).toString();
           let json = JSON.parse(data);
@@ -81,7 +82,7 @@ let init = async (projectName) => {
           fs.writeFileSync(packageJson, JSON.stringify(json, null, '\t'), 'utf-8');
           console.log(symbol.success, chalk.green('Project initialization finished! 项目初始化完成！依次运行以下命令：'));
           console.log(symbol.success, chalk.green('cd ' + projectName));
-          console.log(symbol.success, chalk.green('npm install'));
+          console.log(symbol.success, chalk.green(isNotMfeMaster ? 'npm install' : 'npm run cinit'));
           console.log(symbol.success, chalk.green('npm run serve'));
         }
       }, () => {

@@ -23,12 +23,26 @@ var downloadLocal = exports.downloadLocal = function () {
         switch (_context.prev = _context.next) {
           case 0:
             templatePath = '';
+            _context.t0 = projectType;
+            _context.next = _context.t0 === 'web' ? 4 : _context.t0 === 'mfe-subapp' ? 6 : _context.t0 === 'mfe-master' ? 8 : 10;
+            break;
 
-            if (projectType === 'web') {
-              templatePath = 'hql7/wl-template-vue';
-            } else {
-              templatePath = 'hql7/wl-template-mfe-subapp-vue';
-            }
+          case 4:
+            templatePath = 'hql7/wl-template-vue';
+            return _context.abrupt('break', 11);
+
+          case 6:
+            templatePath = 'hql7/wl-template-mfe-subapp-vue';
+            return _context.abrupt('break', 11);
+
+          case 8:
+            templatePath = 'hql7/wl-template-mfe-master-vue';
+            return _context.abrupt('break', 11);
+
+          case 10:
+            templatePath = 'hql7/wl-template-vue';
+
+          case 11:
             return _context.abrupt('return', new Promise(function (resolve, reject) {
               //projectName 为下载到的本地目录
               (0, _downloadGitRepo2.default)(templatePath, projectName, function (err) {
@@ -39,7 +53,7 @@ var downloadLocal = exports.downloadLocal = function () {
               });
             }));
 
-          case 3:
+          case 12:
           case 'end':
             return _context.stop();
         }

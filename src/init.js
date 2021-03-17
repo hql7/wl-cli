@@ -27,7 +27,8 @@ const question = [
     choices: [
       "web",
       "mfe-subapp",
-      "mfe-master"
+      "mfe-master",
+      "simple-template",
     ]
   },
   {

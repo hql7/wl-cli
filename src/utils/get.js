@@ -12,6 +12,9 @@ export const downloadLocal = async (projectName, projectType) => {
     case 'mfe-master':
       templatePath = 'hql7/wl-template-mfe-master-vue'
       break;
+    case 'simple-template':
+      templatePath = 'hql7/vue-simple-template'
+      break;
     default:
       templatePath = 'hql7/wl-template-vue'
   }
